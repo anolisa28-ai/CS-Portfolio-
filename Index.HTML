@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AK's App Portfolio</title>
+    
+    <!-- Internal CSS Styles -->
+    <style>
+        /* Import a modern Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+        /* Define a new color palette */
+        :root {
+            --primary-color: #007bff; /* A vibrant, professional blue */
+            --primary-dark: #0056b3; /* A darker blue for hovers */
+            --primary-light: #e6f2ff; /* A very light blue for tags */
+            --text-dark: #2d3748;
+            --text-light: #4a5568;
+            --background-color: #f4f7f9;
+            --card-background: #ffffff;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+            --card-shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        /* General Body & Font Styles */
+        body {
+            /* Use the new imported font */
+            font-family: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Header Styling */
+        header {
+            /* A modern gradient header */
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--card-background);
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+
+        header p {
+            color: var(--card-background);
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Main App Gallery Layout */
+        .app-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Individual App Card Styling */
+        .app-card {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            
+            /* Removed opacity: 0; so cards are visible by default */
+        }
+
+        .app-card:hover {
+            transform: translateY(-8px); /* A more noticeable lift */
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .app-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--primary-color); /* Use the primary color for headings */
+        }
+
+        .project-description {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Technology Tags */
+        .tech-stack {
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-stack span {
+            display: inline-block;
+            background-color: var(--primary-light); /* Light blue background */
+            color: var(--primary-dark); /* Dark blue text */
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700; /* Bolder tags */
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Button Styling */
+        .card-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .button {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--card-background);
+            background-color: var(--primary-color);
+            padding: 0.7rem 1.3rem; /* Slightly larger buttons */
+            border-radius: 8px;
+            font-weight: 700;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px); /* Add a slight lift to the button */
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            color: #718096;
+            background-color: var(--card-background);
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Removed the @keyframes animation */
+        
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AK's Projects</h1>
+        <p>A collection of apps I've developed in my class.</p>
+    </header>
+
+    <main class="app-gallery">
+        <!-- App Card 1: Clicker App -->
+        <div class="app-card">
+            <img src="https://placehold.co/600x400/007bff/FFFFFF?text=Clicker+App" alt="Screenshot of Clicker App">
+            <div class="card-content">
+                <h2>Clicker App</h2>
+                <p class="project-description">A fun and simple clicker game. Click the button to increase your score and buy upgrades!</p>
+                <div class="tech-stack">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                </div>
+                <div class="card-buttons">
+                    <a href="#" class="button">View Code</a>
+                    <a href="#" class="button">Live Demo</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Card 2: Tic Tac Toe App -->
+        <div class="app-card">
+            <img src="https://placehold.co/600x400/17a2b8/FFFFFF?text=Tic+Tac+Toe" alt="Screenshot of Tic Tac Toe App">
+            <div class="card-content">
+                <h2>Tic Tac Toe</h2>
+                <p class="project-description">The classic game of Tic Tac Toe. Play against a friend or challenge the computer!</p>
+                <div class="tech-stack">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                </div>
+                <div class="card-buttons">
+                    <a href="#" class="button">View Code</a>
+                    <!-- Updated this link -->
+                    <a href="https://ai2.appinventor.mit.edu/#5911890323636224" class="button">Live Demo</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- App Card 3: Click Counter App -->
+        <div class="app-card">
+            <img src="https://placehold.co/600x400/28a745/FFFFFF?text=Click+Counter" alt="Screenshot of Click Counter App">
+            <div class="card-content">
+                <h2>Click Counter</h2>
+                <p class="project-description">A simple utility to count your clicks. See how fast you can click in 10 seconds!</p>
+                <div class="tech-stack">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                </div>
+                <div classRead-only: card-buttons">
+                    <a href="#" class="button">View Code</a>
+                    <!-- Updated this link -->
+                    <a href="https://ai2.appinventor.mit.edu/#5525504781254656" class="button">Live Demo</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AK. All rights reserved.</p>
+    </footer>
+
+    <!-- Internal JavaScript -->
+    <script>
+        // This file is ready for your future interactive features!
+        // For example, you could add a filter for projects based on the technology used.
+
+        console.log("Portfolio website loaded successfully!");
+
+        // Removed the animation code that was here
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cards will now be visible on load
+        });
+    </script>
+</body>
+</html>
+
+
