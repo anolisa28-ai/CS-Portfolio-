@@ -3,244 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AK's App Portfolio</title>
-    
-    <!-- Internal CSS Styles -->
+    <title>Dev Suite Pro & Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Import a modern Google Font */
-        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;700;900&display=swap');
 
-        /* Define a new color palette */
-        :root {
-            --primary-color: #007bff; /* A vibrant, professional blue */
-            --primary-dark: #0056b3; /* A darker blue for hovers */
-            --primary-light: #e6f2ff; /* A very light blue for tags */
-            --text-dark: #2d3748;
-            --text-light: #4a5568;
-            --background-color: #f4f7f9;
-            --card-background: #ffffff;
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
-            --card-shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        /* General Body & Font Styles */
         body {
-            /* Use the new imported font */
-            font-family: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-light);
-            line-height: 1.6;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            padding-bottom: 120px; /* Space for fixed nav and footer */
         }
 
-        /* Header Styling */
-        header {
-            /* A modern gradient header */
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: var(--card-background);
-            padding: 3rem 1.5rem;
-            text-align: center;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            color: #1e293b;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.8rem;
-            font-weight: 700;
+        .nav-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        header p {
-            color: var(--card-background);
-            margin-top: 0.5rem;
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .nav-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Main App Gallery Layout */
-        .app-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        .nav-active {
+            ring: 3px solid #10b981;
+            background: rgba(255, 255, 255, 0.2) !important;
         }
 
-        /* Individual App Card Styling */
-        .app-card {
-            background-color: var(--card-background);
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-            overflow: hidden;
-            width: 350px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            
-            /* Removed opacity: 0; so cards are visible by default */
-        }
+        .app-view { display: none; width: 100%; max-width: 1200px; margin: 0 auto; }
+        .app-view.active { display: block; animation: fadeIn 0.4s ease; }
 
-        .app-card:hover {
-            transform: translateY(-8px); /* A more noticeable lift */
-            box-shadow: var(--card-shadow-hover);
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .app-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-            /* Add a dark background to the image area to mimic a code editor */
-            background-color: #2d3748;
+        .bit-box {
+            width: 3.5rem; height: 4.5rem; border-radius: 0.75rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: 900; cursor: pointer; transition: 0.2s;
         }
+        .bit-active { background: #10b981; color: white; box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
+        .bit-inactive { background: #e2e8f0; color: #64748b; }
 
-        .card-content {
-            padding: 1.5rem;
+        .app-link-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: #1e293b; color: white; padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem; font-weight: 700; transition: 0.2s;
         }
+        .app-link-btn:hover { background: #334155; transform: scale(1.05); }
 
-        .card-content h2 {
-            margin-top: 0;
-            font-size: 1.5rem;
-            color: var(--primary-color); /* Use the primary color for headings */
+        /* Dev Suite Pro Logic Styles */
+        .dev-input { 
+            background: #0f172a; border: 1px solid #334155; color: #38bdf8; 
+            font-family: 'Fira Code', monospace; resize: none; 
         }
-
-        .project-description {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        /* Technology Tags */
-        .tech-stack {
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-stack span {
-            display: inline-block;
-            background-color: var(--primary-light); /* Light blue background */
-            color: var(--primary-dark); /* Dark blue text */
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 700; /* Bolder tags */
-            margin-right: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        /* Button Styling */
-        .card-buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .button {
-            display: inline-block;
-            text-decoration: none;
-            color: var(--card-background);
-            background-color: var(--primary-color);
-            padding: 0.7rem 1.3rem; /* Slightly larger buttons */
-            border-radius: 8px;
-            font-weight: 700;
-            text-align: center;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .button:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px); /* Add a slight lift to the button */
-        }
-
-        /* Footer Styling */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
-            color: #718096;
-            background-color: var(--card-background);
-            border-top: 1px solid #e0e0e0;
-        }
-
-        /* Removed the @keyframes animation */
-        
     </style>
 </head>
-<body>
+<body class="py-10 px-4">
 
-    <header>
-        <h1>AK's Projects</h1>
-        <p>A collection of apps I've developed in my class.</p>
+    <!-- HEADER -->
+    <header class="text-center mb-12">
+        <h1 class="text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-400 mb-2">
+            DEVELOPER MASTER SUITE
+        </h1>
+        <p class="text-slate-400 font-medium">Interactive Tools & App Inventor Portfolio</p>
     </header>
 
-    <main class="app-gallery">
-        <!-- App Card 1: Clicker App -->
-        <div class="app-card">
-            <!-- Updated Image Source -->
-            <img src="Click App Screenshot.png" alt="Screenshot of Clicker app code">
-            <div class="card-content">
-                <h2>Clicker App</h2>
-                <p class="project-description">A fun and simple clicker game. Click the button to increase your score and buy upgrades!</p>
-                <div class="tech-stack">
-                    <span>App Inventor</span>
+    <!-- MAIN APP VIEWS -->
+    <main>
+        
+        <!-- DASHBOARD / HOME -->
+        <div id="view-dashboard" class="app-view active">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Summary Card 1 -->
+                <div class="glass-card p-6 flex flex-col">
+                    <div class="h-40 bg-emerald-100 rounded-xl mb-4 flex items-center justify-center overflow-hidden">
+                        <svg class="w-24 h-24 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Binary Odometer</h3>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">An educational tool designed to visualize how bit manipulation correlates to decimal values in an 8-bit environment.</p>
+                    <button onclick="switchApp('odometer')" class="bg-emerald-500 text-white py-2 rounded-lg font-bold">Launch Tool</button>
                 </div>
-                <div class="card-buttons">
-                    <!-- Updated these links -->
-                    <a href="https://ai2.appinventor.mit.edu/#5525504781254656" class="button">View Code</a>
-                    <a href="https://i.imgur.com/39J6J3J.png" class="button">Live Demo</a>
+
+                <!-- Summary Card 2 -->
+                <div class="glass-card p-6 flex flex-col">
+                    <div class="h-40 bg-sky-100 rounded-xl mb-4 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">ASCII & Dev Suite</h3>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">Advanced hex-to-ASCII decoders, multi-format text synchronizers, and high-level data visualization for developers.</p>
+                    <button onclick="switchApp('devsuite')" class="bg-sky-500 text-white py-2 rounded-lg font-bold">Open Suite</button>
+                </div>
+
+                <!-- Summary Card 3 (UPDATED LINK) -->
+                <div class="glass-card p-6 flex flex-col">
+                    <div class="h-40 bg-purple-100 rounded-xl mb-4 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Tic-Tac-Toe Pro</h3>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">My custom-built Tic-Tac-Toe application featuring logic gates and player turn management via App Inventor.</p>
+                    <a href="https://ai2.appinventor.mit.edu/#5911890323636224" target="_blank" class="bg-purple-500 text-white py-2 rounded-lg font-bold text-center">View Project</a>
+                </div>
+
+                <!-- Summary Card 4 (UPDATED LINK) -->
+                <div class="glass-card p-6 flex flex-col">
+                    <div class="h-40 bg-rose-100 rounded-xl mb-4 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Ball Catcher (Randomizer)</h3>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">A high-speed randomizer game where players must intercept a bouncing ball. Tests reaction time and spatial logic.</p>
+                    <a href="https://ai2.appinventor.mit.edu/#5344220855468032" target="_blank" class="bg-rose-500 text-white py-2 rounded-lg font-bold text-center">View Project</a>
+                </div>
+
+                <!-- Summary Card 5 -->
+                <div class="glass-card p-6 flex flex-col">
+                    <div class="h-40 bg-amber-100 rounded-xl mb-4 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Click Odometer</h3>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">A manual increment tool that demonstrates base-10 to base-2 conversion through physical interaction and counting.</p>
+                    <button onclick="switchApp('clickodo')" class="bg-amber-500 text-white py-2 rounded-lg font-bold">Launch Odometer</button>
                 </div>
             </div>
         </div>
 
-        <!-- App Card 2: Tic Tac Toe App -->
-        <div class="app-card">
-            <!-- Updated Image Source -->
-            <img src="Tic Tac Toe Screenshot.png" alt="Code snippet for Tic Tac Toe">
-            <div class="card-content">
-                <h2>Tic Tac Toe</h2>
-                <p class="project-description">A classic two-player game of X's and O's, built with App Inventor.</p>
-                <div class="tech-stack">
-                    <span>App Inventor</span>
+        <!-- BINARY ODOMETER TOOL -->
+        <div id="view-odometer" class="app-view">
+            <div class="glass-card p-8 text-center">
+                <h2 class="text-3xl font-black mb-6">Binary Odometer</h2>
+                <div id="bit-container" class="flex flex-wrap justify-center gap-3 mb-8"></div>
+                <div class="bg-slate-100 p-8 rounded-2xl inline-block mb-8">
+                    <span class="text-sm font-bold text-slate-400 block uppercase mb-1">Decimal</span>
+                    <span id="decimal-display" class="text-7xl font-mono font-black text-slate-800">0</span>
                 </div>
-                <div class="card-buttons">
-                    <a href="https://ai2.appinventor.mit.edu/#5911890323636224" class="button">View Code</a>
-                    <!-- Updated this link -->
-                    <a href="https://i.imgur.com/39aXoX4.png" class="button">Live Demo</a>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="incrementOdo()" class="bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold text-xl shadow-lg hover:bg-emerald-600">Increment (+1)</button>
+                    <button onclick="resetOdo()" class="bg-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold text-xl">Reset</button>
                 </div>
             </div>
         </div>
 
-        <!-- App Card 3: Click Counter App -->
-        <div class="app-card">
-            <img src="Click Counter Screenshot copy.png" alt="Code snippet for Click Counter">
-            <div class="card-content">
-                <h2>Click Counter</h2>
-                <p class="project-description">A simple app that counts how many times you can click a button.</p>
-                <div class="tech-stack">
-                    <span>App Inventor</span>
+        <!-- CLICK ODOMETER TOOL -->
+        <div id="view-clickodo" class="app-view">
+            <div class="glass-card p-8 text-center max-w-2xl mx-auto">
+                <h2 class="text-3xl font-black mb-4">Click Odometer</h2>
+                <p class="text-slate-500 mb-8">Tap the screen to increase the count and watch the bits shift.</p>
+                <div id="click-display-area" onclick="incrementClickOdo()" class="w-full h-64 bg-slate-100 rounded-3xl flex items-center justify-center cursor-pointer border-4 border-dashed border-slate-300 hover:border-amber-400 transition-all active:scale-95 group">
+                    <div class="text-center">
+                        <span id="click-val" class="text-8xl font-black text-slate-800 block">0</span>
+                        <span class="text-amber-500 font-bold uppercase tracking-widest group-hover:animate-pulse">Tap to Count</span>
+                    </div>
                 </div>
-                <div class="card-buttons">
-                    <!-- Updated these links -->
-                    <a href="https://ai2.appinventor.mit.edu/#6382475377967104" class="button">View Code</a>
-                    <a href="https://i.imgur.com/g9eWqfO.png" class="button">Live Demo</a>
+                <div id="click-bits" class="flex justify-center gap-2 mt-8"></div>
+                <button onclick="resetClickOdo()" class="mt-8 text-slate-400 underline font-bold">Reset Counter</button>
+            </div>
+        </div>
+
+        <!-- DEV SUITE PRO -->
+        <div id="view-devsuite" class="app-view">
+            <div class="glass-card p-8">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+                    <h2 class="text-3xl font-black">Dev Suite Pro</h2>
+                    <div class="flex gap-2 bg-slate-100 p-1 rounded-xl">
+                        <button onclick="switchDevTab('hexpro')" id="dev-tab-hexpro" class="dev-sub-tab px-6 py-2 rounded-lg font-bold text-sm bg-white shadow-sm text-sky-600">Hex Decoder</button>
+                        <button onclick="switchDevTab('asciipro')" id="dev-tab-asciipro" class="dev-sub-tab px-6 py-2 rounded-lg font-bold text-sm">ASCII Sync</button>
+                    </div>
+                </div>
+                
+                <div id="dev-sec-hexpro" class="dev-sub-section space-y-6">
+                    <textarea id="pro-hex-input" oninput="runHexHunterPro()" class="dev-input w-full h-40 p-4 rounded-2xl" placeholder="Paste hexadecimal string (e.g. 48 65 6c 6c 6f)..."></textarea>
+                    <div class="bg-slate-900 p-6 rounded-2xl">
+                        <h4 class="text-xs text-slate-500 mb-2 font-bold uppercase tracking-widest">Plaintext Output</h4>
+                        <div id="pro-hex-ascii" class="text-sky-400 font-mono text-xl break-all min-h-[40px]"></div>
+                    </div>
+                </div>
+
+                <div id="dev-sec-asciipro" class="dev-sub-section hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-400 uppercase">Text</label>
+                        <textarea id="pro-ascii-text" oninput="syncAsciiPro('text')" class="dev-input w-full h-64 p-4 rounded-2xl"></textarea>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-400 uppercase">Decimal</label>
+                        <textarea id="pro-ascii-dec" oninput="syncAsciiPro('dec')" class="dev-input w-full h-64 p-4 rounded-2xl"></textarea>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-400 uppercase">Hex</label>
+                        <textarea id="pro-ascii-hex" oninput="syncAsciiPro('hex')" class="dev-input w-full h-64 p-4 rounded-2xl"></textarea>
+                    </div>
                 </div>
             </div>
         </div>
 
     </main>
 
-    <footer>
-        <p>&copy; 2025 AK. All rights reserved.</p>
+    <!-- FOOTER NAVIGATION & COPYRIGHT -->
+    <footer class="fixed bottom-0 left-0 right-0 z-50">
+        <div class="max-w-2xl mx-auto px-4 pb-4">
+            <!-- Navigation -->
+            <nav class="bg-slate-900/80 backdrop-blur-md p-2 rounded-2xl border border-white/10 flex gap-2 overflow-x-auto mb-2">
+                <button onclick="switchApp('dashboard')" id="nav-dashboard" class="nav-card nav-active px-4 py-2 rounded-xl text-white text-xs font-bold whitespace-nowrap">Dashboard</button>
+                <button onclick="switchApp('odometer')" id="nav-odometer" class="nav-card px-4 py-2 rounded-xl text-white text-xs font-bold whitespace-nowrap">Odometer</button>
+                <button onclick="switchApp('clickodo')" id="nav-clickodo" class="nav-card px-4 py-2 rounded-xl text-white text-xs font-bold whitespace-nowrap">Click Odo</button>
+                <button onclick="switchApp('devsuite')" id="nav-devsuite" class="nav-card px-4 py-2 rounded-xl text-white text-xs font-bold whitespace-nowrap">Dev Suite</button>
+                <a href="https://ai2.appinventor.mit.edu/#5911890323636224" target="_blank" class="nav-card px-4 py-2 rounded-xl text-white text-xs font-bold whitespace-nowrap bg-purple-500/20">Tic-Tac-Toe ↗</a>
+                <a href="https://ai2.appinventor.mit.edu/#5344220855468032" target="_blank" class="nav-card px-4 py-2 rounded-xl text-white text-xs font-bold whitespace-nowrap bg-rose-500/20">Ball Catcher ↗</a>
+            </nav>
+            <!-- Copyright Tag -->
+            <div class="text-center text-[10px] text-slate-500 font-medium uppercase tracking-widest opacity-70">
+                &copy; 2025 Akarachi Nolisa. All Rights Reserved.
+            </div>
+        </div>
     </footer>
 
-    <!-- Internal JavaScript -->
     <script>
-        // This file is ready for your future interactive features!
-        // For example, you could add a filter for projects based on the technology used.
+        // NAVIGATION
+        function switchApp(id) {
+            document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-card').forEach(n => n.classList.remove('nav-active'));
+            
+            const target = document.getElementById('view-' + id);
+            const nav = document.getElementById('nav-' + id);
+            if(target) target.classList.add('active');
+            if(nav) nav.classList.add('nav-active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
 
-        console.log("Portfolio website loaded successfully!");
+        function switchDevTab(tab) {
+            document.querySelectorAll('.dev-sub-section').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('.dev-sub-tab').forEach(t => t.classList.remove('bg-white', 'shadow-sm', 'text-sky-600'));
+            document.getElementById('dev-sec-' + tab).classList.remove('hidden');
+            document.getElementById('dev-tab-' + tab).classList.add('bg-white', 'shadow-sm', 'text-sky-600');
+        }
 
-        // Removed the animation code that was here
-        document.addEventListener('DOMContentLoaded', () => {
-            // Cards will now be visible on load
-        });
+        // BINARY ODOMETER LOGIC
+        let odoVal = 0;
+        function renderOdo() {
+            const container = document.getElementById('bit-container');
+            if (!container) return;
+            container.innerHTML = '';
+            document.getElementById('decimal-display').textContent = odoVal;
+            for(let i=7; i>=0; i--) {
+                const bit = (odoVal >> i) & 1;
+                const div = document.createElement('div');
+                div.className = `bit-box ${bit ? 'bit-active' : 'bit-inactive'}`;
+                div.textContent = bit;
+                div.onclick = () => { odoVal ^= (1 << i); renderOdo(); };
+                container.appendChild(div);
+            }
+        }
+        function incrementOdo() { odoVal = (odoVal + 1) % 256; renderOdo(); }
+        function resetOdo() { odoVal = 0; renderOdo(); }
+
+        // CLICK ODOMETER LOGIC
+        let clickVal = 0;
+        function renderClickOdo() {
+            const display = document.getElementById('click-val');
+            const container = document.getElementById('click-bits');
+            if (!display || !container) return;
+            display.textContent = clickVal;
+            container.innerHTML = '';
+            for(let i=7; i>=0; i--) {
+                const bit = (clickVal >> i) & 1;
+                const s = document.createElement('div');
+                s.className = `w-4 h-4 rounded-full ${bit ? 'bg-amber-500' : 'bg-slate-300'}`;
+                container.appendChild(s);
+            }
+        }
+        function incrementClickOdo() { clickVal++; renderClickOdo(); }
+        function resetClickOdo() { clickVal = 0; renderClickOdo(); }
+
+        // DEV SUITE: HEX PRO
+        function runHexHunterPro() {
+            const raw = document.getElementById('pro-hex-input').value.replace(/[^0-9a-fA-F]/g, '');
+            let text = "";
+            for(let i=0; i<raw.length; i+=2) {
+                const code = parseInt(raw.substr(i, 2), 16);
+                if(!isNaN(code)) text += (code >= 32 && code <= 126) ? String.fromCharCode(code) : '·';
+            }
+            document.getElementById('pro-hex-ascii').textContent = text;
+        }
+
+        // DEV SUITE: ASCII SYNC
+        function syncAsciiPro(type) {
+            const t = document.getElementById('pro-ascii-text');
+            const d = document.getElementById('pro-ascii-dec');
+            const h = document.getElementById('pro-ascii-hex');
+            if(type === 'text') {
+                let decs = [], hexs = [];
+                for(let i=0; i<t.value.length; i++){
+                    const c = t.value.charCodeAt(i);
+                    decs.push(c); hexs.push(c.toString(16).toUpperCase());
+                }
+                d.value = decs.join(' '); h.value = hexs.join(' ');
+            } else if(type === 'dec') {
+                const codes = d.value.split(/\s+/);
+                let txt = "", hexs = [];
+                codes.forEach(c => {
+                    const n = parseInt(c);
+                    if(!isNaN(n)){ txt += String.fromCharCode(n); hexs.push(n.toString(16).toUpperCase()); }
+                });
+                t.value = txt; h.value = hexs.join(' ');
+            } else if(type === 'hex') {
+                const hexes = h.value.replace(/[^0-9a-fA-F]/g, '');
+                let txt = "", decs = [];
+                for(let i=0; i<hexes.length; i+=2){
+                    const n = parseInt(hexes.substr(i,2), 16);
+                    if(!isNaN(n)){ txt += String.fromCharCode(n); decs.push(n); }
+                }
+                t.value = txt; d.value = decs.join(' ');
+            }
+        }
+
+        // INIT
+        window.onload = () => {
+            renderOdo();
+            renderClickOdo();
+        };
     </script>
 </body>
 </html>
-
