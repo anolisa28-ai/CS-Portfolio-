@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev Suite Pro & Portfolio</title>
+    <title>AK's Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;700;900&display=swap');
@@ -14,7 +14,7 @@
             color: #f8fafc;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            padding-bottom: 120px; /* Space for fixed nav and footer */
+            padding-bottom: 120px; 
         }
 
         .glass-card {
@@ -56,202 +56,368 @@
         .bit-active { background: #10b981; color: white; box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
         .bit-inactive { background: #e2e8f0; color: #64748b; }
 
-        .app-link-btn {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            background: #1e293b; color: white; padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem; font-weight: 700; transition: 0.2s;
-        }
-        .app-link-btn:hover { background: #334155; transform: scale(1.05); }
+        #game-canvas { background: #f1f5f9; border-radius: 1rem; cursor: crosshair; touch-action: none; }
 
-        /* Dev Suite Pro Logic Styles */
-        .dev-input { 
-            background: #0f172a; border: 1px solid #334155; color: #38bdf8; 
-            font-family: 'Fira Code', monospace; resize: none; 
+        .ttt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 300px; margin: 20px auto; }
+        .ttt-cell { aspect-ratio: 1/1; background: #f1f5f9; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; color: #1e293b; cursor: pointer; transition: background 0.2s; }
+        .ttt-cell:hover { background: #e2e8f0; }
+
+        .trivia-btn {
+            background: #f8fafc; border: 2px solid #e2e8f0; padding: 1rem; border-radius: 1rem;
+            font-weight: 700; transition: all 0.2s; text-align: left;
         }
+        .trivia-btn:hover { border-color: #3b82f6; background: #eff6ff; }
+        .trivia-correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534; }
+        .trivia-wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
     </style>
 </head>
 <body class="py-10 px-4">
 
     <!-- HEADER -->
     <header class="text-center mb-12">
-        <h1 class="text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-400 mb-2">
-            DEVELOPER MASTER SUITE
+        <h1 class="text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-400 mb-2 uppercase">
+            AK'S PORTFOLIO
         </h1>
-        <p class="text-slate-400 font-medium">Interactive Tools & App Inventor Portfolio</p>
+        <p class="text-slate-400 font-medium">Interactive Tools & App Inventor Projects</p>
     </header>
 
-    <!-- MAIN APP VIEWS -->
     <main>
         
-        <!-- DASHBOARD / HOME -->
+        <!-- DASHBOARD -->
         <div id="view-dashboard" class="app-view active">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Summary Card 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- Click Counter -->
                 <div class="glass-card p-6 flex flex-col">
-                    <div class="h-40 bg-emerald-100 rounded-xl mb-4 flex items-center justify-center overflow-hidden">
-                        <svg class="w-24 h-24 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                    </div>
+                    <div class="h-40 bg-amber-100 rounded-xl mb-4 flex items-center justify-center overflow-hidden text-amber-500 text-6xl font-black">#</div>
+                    <h3 class="text-xl font-bold mb-2">Click Counter</h3>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">A simple, foundational app demonstrating core state management and UI updates.</p>
+                    <button onclick="switchApp('clickcounter')" class="bg-amber-500 text-white py-2 rounded-lg font-bold hover:bg-amber-600 transition">Open Counter</button>
+                </div>
+
+                <!-- Binary Odometer -->
+                <div class="glass-card p-6 flex flex-col">
+                    <div class="h-40 bg-emerald-100 rounded-xl mb-4 flex items-center justify-center overflow-hidden text-emerald-500 text-6xl font-black">01</div>
                     <h3 class="text-xl font-bold mb-2">Binary Odometer</h3>
-                    <p class="text-slate-600 text-sm mb-4 flex-grow">An educational tool designed to visualize how bit manipulation correlates to decimal values in an 8-bit environment.</p>
-                    <button onclick="switchApp('odometer')" class="bg-emerald-500 text-white py-2 rounded-lg font-bold">Launch Tool</button>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">Visualize bit manipulation and decimal conversions in real-time.</p>
+                    <button onclick="switchApp('odometer')" class="bg-emerald-500 text-white py-2 rounded-lg font-bold hover:bg-emerald-600 transition">Launch Tool</button>
                 </div>
 
-                <!-- Summary Card 2 -->
-                <div class="glass-card p-6 flex flex-col">
-                    <div class="h-40 bg-sky-100 rounded-xl mb-4 flex items-center justify-center">
-                        <svg class="w-24 h-24 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">ASCII & Dev Suite</h3>
-                    <p class="text-slate-600 text-sm mb-4 flex-grow">Advanced hex-to-ASCII decoders, multi-format text synchronizers, and high-level data visualization for developers.</p>
-                    <button onclick="switchApp('devsuite')" class="bg-sky-500 text-white py-2 rounded-lg font-bold">Open Suite</button>
+                <!-- Trivia Suite -->
+                <div class="glass-card p-6 flex flex-col border-2 border-sky-400 shadow-sky-400/20">
+                    <div class="h-40 bg-sky-100 rounded-xl mb-4 flex items-center justify-center text-sky-500 text-6xl font-black">?</div>
+                    <h3 class="text-xl font-bold mb-2">Mega Trivia App</h3>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">Contains 40+ Fast Food Guessing sets and all 50 US State Capitals.</p>
+                    <button onclick="switchApp('trivia')" class="bg-sky-500 text-white py-2 rounded-lg font-bold hover:bg-sky-600 transition">Play Trivia</button>
                 </div>
 
-                <!-- Summary Card 3 (UPDATED LINK) -->
+                <!-- Ball Catcher -->
                 <div class="glass-card p-6 flex flex-col">
-                    <div class="h-40 bg-purple-100 rounded-xl mb-4 flex items-center justify-center">
-                        <svg class="w-24 h-24 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
+                    <div class="h-40 bg-rose-100 rounded-xl mb-4 flex items-center justify-center text-rose-500 text-6xl font-black">●</div>
+                    <h3 class="text-xl font-bold mb-2">Ball Catcher Pro</h3>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">A high-speed reaction game built with HTML5 Canvas.</p>
+                    <button onclick="switchApp('ballcatcher')" class="bg-rose-500 text-white py-2 rounded-lg font-bold hover:bg-rose-600 transition">Play Game</button>
+                </div>
+
+                <!-- Tic-Tac-Toe -->
+                <div class="glass-card p-6 flex flex-col border-2 border-purple-400 shadow-purple-400/20 md:col-span-2 lg:col-span-1">
+                    <div class="h-40 bg-purple-100 rounded-xl mb-4 flex items-center justify-center text-purple-500 text-6xl font-black">XOX</div>
                     <h3 class="text-xl font-bold mb-2">Tic-Tac-Toe Pro</h3>
-                    <p class="text-slate-600 text-sm mb-4 flex-grow">My custom-built Tic-Tac-Toe application featuring logic gates and player turn management via App Inventor.</p>
-                    <a href="https://ai2.appinventor.mit.edu/#5911890323636224" target="_blank" class="bg-purple-500 text-white py-2 rounded-lg font-bold text-center">View Project</a>
-                </div>
-
-                <!-- Summary Card 4 (UPDATED LINK) -->
-                <div class="glass-card p-6 flex flex-col">
-                    <div class="h-40 bg-rose-100 rounded-xl mb-4 flex items-center justify-center">
-                        <svg class="w-24 h-24 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Ball Catcher (Randomizer)</h3>
-                    <p class="text-slate-600 text-sm mb-4 flex-grow">A high-speed randomizer game where players must intercept a bouncing ball. Tests reaction time and spatial logic.</p>
-                    <a href="https://ai2.appinventor.mit.edu/#5344220855468032" target="_blank" class="bg-rose-500 text-white py-2 rounded-lg font-bold text-center">View Project</a>
-                </div>
-
-                <!-- Summary Card 5 -->
-                <div class="glass-card p-6 flex flex-col">
-                    <div class="h-40 bg-amber-100 rounded-xl mb-4 flex items-center justify-center">
-                        <svg class="w-24 h-24 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Click Odometer</h3>
-                    <p class="text-slate-600 text-sm mb-4 flex-grow">A manual increment tool that demonstrates base-10 to base-2 conversion through physical interaction and counting.</p>
-                    <button onclick="switchApp('clickodo')" class="bg-amber-500 text-white py-2 rounded-lg font-bold">Launch Odometer</button>
+                    <p class="text-slate-600 text-sm mb-4 flex-grow">Classic strategy game with full win and draw detection.</p>
+                    <button onclick="switchApp('ttt')" class="bg-purple-500 text-white py-2 rounded-lg font-bold hover:bg-purple-600 transition">Play Tic-Tac-Toe</button>
                 </div>
             </div>
         </div>
 
-        <!-- BINARY ODOMETER TOOL -->
+        <!-- CLICK COUNTER VIEW -->
+        <div id="view-clickcounter" class="app-view">
+            <div class="glass-card p-8 text-center max-w-2xl mx-auto mb-8">
+                <h2 class="text-3xl font-black mb-6">Click Counter App</h2>
+                <div class="bg-slate-100 p-8 rounded-2xl inline-block mb-8 min-w-[200px] shadow-inner">
+                    <span id="clickcounter-display" class="text-7xl font-mono font-black text-slate-800">0</span>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="incrementClickCounter()" class="bg-amber-500 text-white px-8 py-4 rounded-xl font-bold text-xl shadow-lg hover:bg-amber-600 transition">Click Me!</button>
+                    <button onclick="resetClickCounter()" class="bg-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold text-xl hover:bg-slate-300 transition">Reset</button>
+                </div>
+            </div>
+
+            <div class="glass-card p-8 max-w-2xl mx-auto">
+                <h3 class="text-2xl font-black mb-4 text-amber-500">About Click Counter</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-slate-100 rounded-xl p-2 border-2 border-slate-200 h-64 flex flex-col items-center">
+                        <span class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Simple UI</span>
+                        <img src="Click Counter Screenshot.png" alt="Click Counter UI" class="max-h-full object-contain rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 w-full h-full pb-6">
+                    </div>
+                    <div class="bg-slate-100 rounded-xl p-2 border-2 border-slate-200 h-64 flex flex-col items-center overflow-hidden">
+                        <span class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Simple Code</span>
+                        <img src="Click Counter Code Screenshot.png" alt="Click Counter Code" class="max-h-full object-cover object-top rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 w-full pb-6 cursor-crosshair">
+                    </div>
+                </div>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    The Click Counter is the foundational application that sets the groundwork for logic loops and state variables in MIT App Inventor.
+                </p>
+            </div>
+        </div>
+
+        <!-- BINARY ODOMETER VIEW -->
         <div id="view-odometer" class="app-view">
-            <div class="glass-card p-8 text-center">
+            <div class="glass-card p-8 text-center max-w-2xl mx-auto mb-8">
                 <h2 class="text-3xl font-black mb-6">Binary Odometer</h2>
                 <div id="bit-container" class="flex flex-wrap justify-center gap-3 mb-8"></div>
                 <div class="bg-slate-100 p-8 rounded-2xl inline-block mb-8">
-                    <span class="text-sm font-bold text-slate-400 block uppercase mb-1">Decimal</span>
+                    <span class="text-sm font-bold text-slate-400 block uppercase mb-1">Decimal Value</span>
                     <span id="decimal-display" class="text-7xl font-mono font-black text-slate-800">0</span>
                 </div>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <button onclick="incrementOdo()" class="bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold text-xl shadow-lg hover:bg-emerald-600">Increment (+1)</button>
-                    <button onclick="resetOdo()" class="bg-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold text-xl">Reset</button>
+                    <button onclick="incrementOdo()" class="bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold text-xl shadow-lg hover:bg-emerald-600 transition">Increment (+1)</button>
+                    <button onclick="resetOdo()" class="bg-slate-200 text-slate-700 px-8 py-4 rounded-xl font-bold text-xl hover:bg-slate-300 transition">Reset</button>
                 </div>
+            </div>
+
+            <div class="glass-card p-8 max-w-2xl mx-auto">
+                <h3 class="text-2xl font-black mb-4 text-emerald-500">About Binary Odometer</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-slate-100 rounded-xl p-2 border-2 border-slate-200 h-64 flex flex-col items-center">
+                        <span class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Odometer UI</span>
+                        <img src="Click App Screenshot.png" alt="Click Odometer UI" class="max-h-full object-contain rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 w-full h-full pb-6">
+                    </div>
+                    <div class="bg-slate-100 rounded-xl p-2 border-2 border-slate-200 h-64 flex flex-col items-center overflow-hidden">
+                        <span class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Odometer Code</span>
+                        <img src="Click App Code Screenshot.png" alt="Click Odometer Code" class="max-h-full object-cover object-top rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 w-full pb-6 cursor-crosshair">
+                    </div>
+                </div>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    Interactive educational tool that bridges the gap between digital computing and human-readable numbers.
+                </p>
             </div>
         </div>
 
-        <!-- CLICK ODOMETER TOOL -->
-        <div id="view-clickodo" class="app-view">
-            <div class="glass-card p-8 text-center max-w-2xl mx-auto">
-                <h2 class="text-3xl font-black mb-4">Click Odometer</h2>
-                <p class="text-slate-500 mb-8">Tap the screen to increase the count and watch the bits shift.</p>
-                <div id="click-display-area" onclick="incrementClickOdo()" class="w-full h-64 bg-slate-100 rounded-3xl flex items-center justify-center cursor-pointer border-4 border-dashed border-slate-300 hover:border-amber-400 transition-all active:scale-95 group">
-                    <div class="text-center">
-                        <span id="click-val" class="text-8xl font-black text-slate-800 block">0</span>
-                        <span class="text-amber-500 font-bold uppercase tracking-widest group-hover:animate-pulse">Tap to Count</span>
+        <!-- TRIVIA APP VIEW -->
+        <div id="view-trivia" class="app-view">
+            <div class="glass-card p-8 max-w-2xl mx-auto mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 id="trivia-title" class="text-3xl font-black">Fast Food Quiz</h2>
+                        <p class="text-slate-500 text-sm">Score: <span id="trivia-score" class="font-bold text-sky-600">0</span></p>
+                    </div>
+                    <select id="mode-selector" onchange="changeTriviaMode(this.value)" class="bg-slate-100 border-none rounded-lg p-2 font-bold text-sm outline-none cursor-pointer">
+                        <option value="fastfood">🍔 Fast Food Logos</option>
+                        <option value="capitals">🏛️ State Capitals</option>
+                    </select>
+                </div>
+                <div id="trivia-container" class="space-y-6">
+                    <div id="trivia-question-box" class="h-48 bg-slate-100 rounded-2xl flex items-center justify-center overflow-hidden border-2 border-slate-200">
+                        <div id="question-content" class="text-4xl font-black text-slate-800 text-center px-4"></div>
+                    </div>
+                    <div id="trivia-options" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </div>
+                <div id="trivia-feedback" class="mt-6 text-center font-bold h-6 transition-all duration-300"></div>
+            </div>
+
+            <div class="glass-card p-8 max-w-2xl mx-auto">
+                <h3 class="text-2xl font-black mb-4 text-sky-500">About Mega Trivia</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-slate-100 rounded-xl p-2 border-2 border-slate-200 h-64 flex flex-col items-center">
+                        <span class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">App UI</span>
+                        <img src="Screenshot 2026-04-08 at 12.22.33 PM.png" alt="Trivia App UI" class="max-h-full object-contain rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 w-full h-full pb-6">
+                    </div>
+                    <div class="bg-slate-100 rounded-xl p-2 border-2 border-slate-200 h-64 flex flex-col items-center overflow-hidden">
+                        <span class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Block Code</span>
+                        <img src="Screenshot 2026-04-08 at 12.23.00 PM.jpg" alt="Trivia App Code" class="max-h-full object-cover object-top rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 w-full pb-6 cursor-crosshair">
                     </div>
                 </div>
-                <div id="click-bits" class="flex justify-center gap-2 mt-8"></div>
-                <button onclick="resetClickOdo()" class="mt-8 text-slate-400 underline font-bold">Reset Counter</button>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    A dual-mode trivia application that challenges visual memory and geographical knowledge.
+                </p>
             </div>
         </div>
 
-        <!-- DEV SUITE PRO -->
-        <div id="view-devsuite" class="app-view">
-            <div class="glass-card p-8">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-                    <h2 class="text-3xl font-black">Dev Suite Pro</h2>
-                    <div class="flex gap-2 bg-slate-100 p-1 rounded-xl">
-                        <button onclick="switchDevTab('hexpro')" id="dev-tab-hexpro" class="dev-sub-tab px-6 py-2 rounded-lg font-bold text-sm bg-white shadow-sm text-sky-600">Hex Decoder</button>
-                        <button onclick="switchDevTab('asciipro')" id="dev-tab-asciipro" class="dev-sub-tab px-6 py-2 rounded-lg font-bold text-sm">ASCII Sync</button>
+        <!-- BALL CATCHER VIEW -->
+        <div id="view-ballcatcher" class="app-view">
+            <div class="glass-card p-8 text-center max-w-2xl mx-auto mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-black">Ball Catcher Pro</h2>
+                    <span id="game-score" class="text-3xl font-black text-rose-500">0</span>
+                </div>
+                <div class="relative group">
+                    <canvas id="game-canvas" width="500" height="400" class="w-full h-auto shadow-inner"></canvas>
+                    <div id="game-overlay" class="absolute inset-0 bg-slate-900/60 rounded-2xl flex flex-col items-center justify-center text-white">
+                        <button onclick="startGame()" class="bg-rose-500 px-8 py-3 rounded-xl font-bold text-lg hover:scale-105 transition">Start Game</button>
                     </div>
                 </div>
-                
-                <div id="dev-sec-hexpro" class="dev-sub-section space-y-6">
-                    <textarea id="pro-hex-input" oninput="runHexHunterPro()" class="dev-input w-full h-40 p-4 rounded-2xl" placeholder="Paste hexadecimal string (e.g. 48 65 6c 6c 6f)..."></textarea>
-                    <div class="bg-slate-900 p-6 rounded-2xl">
-                        <h4 class="text-xs text-slate-500 mb-2 font-bold uppercase tracking-widest">Plaintext Output</h4>
-                        <div id="pro-hex-ascii" class="text-sky-400 font-mono text-xl break-all min-h-[40px]"></div>
-                    </div>
-                </div>
+                <p class="mt-4 text-slate-400 text-sm">Move your mouse/finger to catch the falling ball!</p>
+            </div>
 
-                <div id="dev-sec-asciipro" class="dev-sub-section hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold text-slate-400 uppercase">Text</label>
-                        <textarea id="pro-ascii-text" oninput="syncAsciiPro('text')" class="dev-input w-full h-64 p-4 rounded-2xl"></textarea>
+            <div class="glass-card p-8 max-w-2xl mx-auto">
+                <h3 class="text-2xl font-black mb-4 text-rose-500">About Ball Catcher Pro</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-slate-100 rounded-xl p-2 border-2 border-slate-200 h-64 flex flex-col items-center">
+                        <span class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">App UI</span>
+                        <img src="Screenshot 2026-04-08 at 12.36.29 PM.png" alt="Ball Catcher UI" class="max-h-full object-contain rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 w-full h-full pb-6">
                     </div>
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold text-slate-400 uppercase">Decimal</label>
-                        <textarea id="pro-ascii-dec" oninput="syncAsciiPro('dec')" class="dev-input w-full h-64 p-4 rounded-2xl"></textarea>
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold text-slate-400 uppercase">Hex</label>
-                        <textarea id="pro-ascii-hex" oninput="syncAsciiPro('hex')" class="dev-input w-full h-64 p-4 rounded-2xl"></textarea>
+                    <div class="bg-slate-100 rounded-xl p-2 border-2 border-slate-200 h-64 flex flex-col items-center overflow-hidden">
+                        <span class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Block Code</span>
+                        <img src="Screenshot 2026-04-08 at 12.35.48 PM.jpg" alt="Ball Catcher Code" class="max-h-full object-cover object-top rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 w-full pb-6 cursor-crosshair">
                     </div>
                 </div>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    A fast-paced, reflex-testing game showcasing dynamic rendering and collision detection.
+                </p>
+            </div>
+        </div>
+
+        <!-- TIC-TAC-TOE VIEW -->
+        <div id="view-ttt" class="app-view">
+            <div class="glass-card p-8 text-center max-w-2xl mx-auto mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-black">Tic-Tac-Toe Pro</h2>
+                </div>
+                <p id="ttt-status" class="text-slate-500 mb-4 text-xl font-bold">Player X's Turn</p>
+                <div class="ttt-grid" id="ttt-board">
+                    <div class="ttt-cell" data-index="0"></div><div class="ttt-cell" data-index="1"></div><div class="ttt-cell" data-index="2"></div>
+                    <div class="ttt-cell" data-index="3"></div><div class="ttt-cell" data-index="4"></div><div class="ttt-cell" data-index="5"></div>
+                    <div class="ttt-cell" data-index="6"></div><div class="ttt-cell" data-index="7"></div><div class="ttt-cell" data-index="8"></div>
+                </div>
+                <button onclick="resetTTT()" class="mt-8 bg-slate-800 text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-slate-700 transition">Reset Game</button>
+            </div>
+
+            <div class="glass-card p-8 max-w-2xl mx-auto">
+                <h3 class="text-2xl font-black mb-4 text-purple-500">About Tic-Tac-Toe</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-slate-100 rounded-xl p-2 border-2 border-slate-200 h-64 flex flex-col items-center">
+                        <span class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">App UI</span>
+                        <img src="Tic Tac Toe Screenshot.png" alt="Tic Tac Toe UI" class="max-h-full object-contain rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 w-full h-full pb-6">
+                    </div>
+                    <div class="bg-slate-100 rounded-xl p-2 border-2 border-slate-200 h-64 flex flex-col items-center overflow-hidden">
+                        <span class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Block Code</span>
+                        <img src="Tic Tac Toe Code Screenshot.png" alt="Tic Tac Toe Code" class="max-h-full object-cover object-top rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 w-full pb-6 cursor-crosshair">
+                    </div>
+                </div>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    Classic strategy game demonstrating proficiency in logic gates and state variables.
+                </p>
             </div>
         </div>
 
     </main>
 
-    <!-- FOOTER NAVIGATION & COPYRIGHT -->
+    <!-- NAVIGATION BAR -->
     <footer class="fixed bottom-0 left-0 right-0 z-50">
-        <div class="max-w-2xl mx-auto px-4 pb-4">
-            <!-- Navigation -->
-            <nav class="bg-slate-900/80 backdrop-blur-md p-2 rounded-2xl border border-white/10 flex gap-2 overflow-x-auto mb-2">
-                <button onclick="switchApp('dashboard')" id="nav-dashboard" class="nav-card nav-active px-4 py-2 rounded-xl text-white text-xs font-bold whitespace-nowrap">Dashboard</button>
-                <button onclick="switchApp('odometer')" id="nav-odometer" class="nav-card px-4 py-2 rounded-xl text-white text-xs font-bold whitespace-nowrap">Odometer</button>
-                <button onclick="switchApp('clickodo')" id="nav-clickodo" class="nav-card px-4 py-2 rounded-xl text-white text-xs font-bold whitespace-nowrap">Click Odo</button>
-                <button onclick="switchApp('devsuite')" id="nav-devsuite" class="nav-card px-4 py-2 rounded-xl text-white text-xs font-bold whitespace-nowrap">Dev Suite</button>
-                <a href="https://ai2.appinventor.mit.edu/#5911890323636224" target="_blank" class="nav-card px-4 py-2 rounded-xl text-white text-xs font-bold whitespace-nowrap bg-purple-500/20">Tic-Tac-Toe ↗</a>
-                <a href="https://ai2.appinventor.mit.edu/#5344220855468032" target="_blank" class="nav-card px-4 py-2 rounded-xl text-white text-xs font-bold whitespace-nowrap bg-rose-500/20">Ball Catcher ↗</a>
+        <div class="max-w-2xl mx-auto px-4 pb-6">
+            <nav class="bg-slate-900/90 backdrop-blur-xl p-2 rounded-2xl border border-white/10 flex justify-around items-center shadow-2xl">
+                <button onclick="switchApp('dashboard')" id="nav-dashboard" class="nav-card nav-active flex flex-col items-center px-4 py-2 rounded-xl text-white">
+                    <span class="text-[10px] font-bold uppercase tracking-tight">Home</span>
+                </button>
+                <button onclick="switchApp('clickcounter')" id="nav-clickcounter" class="nav-card flex flex-col items-center px-4 py-2 rounded-xl text-white">
+                    <span class="text-[10px] font-bold uppercase tracking-tight">Counter</span>
+                </button>
+                <button onclick="switchApp('odometer')" id="nav-odometer" class="nav-card flex flex-col items-center px-4 py-2 rounded-xl text-white">
+                    <span class="text-[10px] font-bold uppercase tracking-tight">Binary</span>
+                </button>
+                <button onclick="switchApp('trivia')" id="nav-trivia" class="nav-card flex flex-col items-center px-4 py-2 rounded-xl text-white">
+                    <span class="text-[10px] font-bold uppercase tracking-tight">Trivia</span>
+                </button>
+                <button onclick="switchApp('ballcatcher')" id="nav-ballcatcher" class="nav-card flex flex-col items-center px-4 py-2 rounded-xl text-white">
+                    <span class="text-[10px] font-bold uppercase tracking-tight">Game</span>
+                </button>
+                <button onclick="switchApp('ttt')" id="nav-ttt" class="nav-card flex flex-col items-center px-4 py-2 rounded-xl text-white">
+                    <span class="text-[10px] font-bold uppercase tracking-tight">Tic-Tac-Toe</span>
+                </button>
             </nav>
-            <!-- Copyright Tag -->
-            <div class="text-center text-[10px] text-slate-500 font-medium uppercase tracking-widest opacity-70">
-                &copy; 2025 Akarachi Nolisa. All Rights Reserved.
-            </div>
+            <div class="text-center text-[10px] text-slate-500 font-bold mt-2 uppercase tracking-tighter">Akarachi Nolisa • AK's Portfolio</div>
         </div>
     </footer>
 
     <script>
-        // NAVIGATION
+        // --- CLICK COUNTER SYSTEM ---
+        let clickCounterVal = 0;
+        function incrementClickCounter() {
+            clickCounterVal++;
+            document.getElementById('clickcounter-display').textContent = clickCounterVal;
+        }
+        function resetClickCounter() {
+            clickCounterVal = 0;
+            document.getElementById('clickcounter-display').textContent = clickCounterVal;
+        }
+
+        // --- TRIVIA SYSTEM ---
+        const triviaData = {
+            fastfood: [
+                { q: "McDonald's", options: ["McDonald's", "Carl's Jr", "In-N-Out", "Burger King"], correct: 0 },
+                { q: "Pizza Hut", options: ["Pizza Hut", "Domino's", "Papa John's", "Wendy's"], correct: 0 },
+                { q: "Krispy Kreme", options: ["Krispy Kreme", "Dunkin'", "Starbucks", "Cinnabon"], correct: 0 },
+                { q: "Starbucks", options: ["Starbucks", "Panda Express", "Panera", "Subway"], correct: 0 },
+                { q: "Wendy's", options: ["Wendy's", "KFC", "Popeyes", "Little Caesars"], correct: 0 }
+            ],
+            capitals: [
+                { q: "New York", options: ["Albany", "NYC", "Buffalo", "Rochester"], correct: 0 },
+                { q: "California", options: ["Sacramento", "LA", "SF", "San Diego"], correct: 0 },
+                { q: "Florida", options: ["Tallahassee", "Miami", "Orlando", "Tampa"], correct: 0 }
+            ]
+        };
+
+        let currentMode = 'fastfood';
+        let questionIdx = 0;
+        let score = 0;
+        let isLocked = false;
+
         function switchApp(id) {
             document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.nav-card').forEach(n => n.classList.remove('nav-active'));
-            
-            const target = document.getElementById('view-' + id);
-            const nav = document.getElementById('nav-' + id);
-            if(target) target.classList.add('active');
-            if(nav) nav.classList.add('nav-active');
+            document.getElementById('view-' + id).classList.add('active');
+            document.getElementById('nav-' + id).classList.add('nav-active');
             window.scrollTo({top: 0, behavior: 'smooth'});
+            if(id === 'trivia') loadQuestion();
+            if(id !== 'ballcatcher') gameActive = false;
         }
 
-        function switchDevTab(tab) {
-            document.querySelectorAll('.dev-sub-section').forEach(s => s.classList.add('hidden'));
-            document.querySelectorAll('.dev-sub-tab').forEach(t => t.classList.remove('bg-white', 'shadow-sm', 'text-sky-600'));
-            document.getElementById('dev-sec-' + tab).classList.remove('hidden');
-            document.getElementById('dev-tab-' + tab).classList.add('bg-white', 'shadow-sm', 'text-sky-600');
+        function changeTriviaMode(mode) {
+            currentMode = mode;
+            questionIdx = 0; score = 0;
+            document.getElementById('trivia-score').textContent = score;
+            loadQuestion();
         }
 
-        // BINARY ODOMETER LOGIC
+        function loadQuestion() {
+            const data = triviaData[currentMode][questionIdx];
+            const content = document.getElementById('question-content');
+            const optionsBox = document.getElementById('trivia-options');
+            const feedback = document.getElementById('trivia-feedback');
+            isLocked = false; feedback.textContent = ""; optionsBox.innerHTML = "";
+            content.innerHTML = `<span class="text-xs uppercase text-slate-400 block mb-2">${currentMode === 'fastfood' ? 'Logo Identification' : 'State Capital'}</span>${data.q}`;
+            let indices = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+            indices.forEach(i => {
+                const btn = document.createElement('button');
+                btn.className = "trivia-btn";
+                btn.textContent = data.options[i];
+                btn.onclick = () => checkAnswer(i, btn);
+                optionsBox.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(choice, btn) {
+            if (isLocked) return;
+            isLocked = true;
+            const correct = triviaData[currentMode][questionIdx].correct;
+            if (choice === correct) {
+                score++;
+                btn.classList.add('trivia-correct');
+                document.getElementById('trivia-feedback').textContent = "Excellent!";
+                document.getElementById('trivia-score').textContent = score;
+            } else {
+                btn.classList.add('trivia-wrong');
+                document.getElementById('trivia-feedback').textContent = "Not quite!";
+            }
+            setTimeout(() => {
+                questionIdx = (questionIdx + 1) % triviaData[currentMode].length;
+                loadQuestion();
+            }, 1200);
+        }
+
+        // --- BINARY ODOMETER ---
         let odoVal = 0;
         function renderOdo() {
             const container = document.getElementById('bit-container');
-            if (!container) return;
             container.innerHTML = '';
             document.getElementById('decimal-display').textContent = odoVal;
             for(let i=7; i>=0; i--) {
@@ -266,71 +432,69 @@
         function incrementOdo() { odoVal = (odoVal + 1) % 256; renderOdo(); }
         function resetOdo() { odoVal = 0; renderOdo(); }
 
-        // CLICK ODOMETER LOGIC
-        let clickVal = 0;
-        function renderClickOdo() {
-            const display = document.getElementById('click-val');
-            const container = document.getElementById('click-bits');
-            if (!display || !container) return;
-            display.textContent = clickVal;
-            container.innerHTML = '';
-            for(let i=7; i>=0; i--) {
-                const bit = (clickVal >> i) & 1;
-                const s = document.createElement('div');
-                s.className = `w-4 h-4 rounded-full ${bit ? 'bg-amber-500' : 'bg-slate-300'}`;
-                container.appendChild(s);
-            }
-        }
-        function incrementClickOdo() { clickVal++; renderClickOdo(); }
-        function resetClickOdo() { clickVal = 0; renderClickOdo(); }
+        // --- BALL CATCHER ---
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        let gameActive = false, gameScore = 0;
+        let ball = { x: 250, y: 0, speed: 4, r: 15 };
+        let paddle = { x: 200, w: 100, h: 15 };
 
-        // DEV SUITE: HEX PRO
-        function runHexHunterPro() {
-            const raw = document.getElementById('pro-hex-input').value.replace(/[^0-9a-fA-F]/g, '');
-            let text = "";
-            for(let i=0; i<raw.length; i+=2) {
-                const code = parseInt(raw.substr(i, 2), 16);
-                if(!isNaN(code)) text += (code >= 32 && code <= 126) ? String.fromCharCode(code) : '·';
-            }
-            document.getElementById('pro-hex-ascii').textContent = text;
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            paddle.x = (e.clientX - rect.left) * (canvas.width / rect.width) - paddle.w/2;
+        });
+
+        function startGame() {
+            document.getElementById('game-overlay').classList.add('hidden');
+            gameScore = 0; document.getElementById('game-score').textContent = "0";
+            ball.y = 0; ball.x = Math.random() * canvas.width; ball.speed = 4;
+            gameActive = true; loop();
         }
 
-        // DEV SUITE: ASCII SYNC
-        function syncAsciiPro(type) {
-            const t = document.getElementById('pro-ascii-text');
-            const d = document.getElementById('pro-ascii-dec');
-            const h = document.getElementById('pro-ascii-hex');
-            if(type === 'text') {
-                let decs = [], hexs = [];
-                for(let i=0; i<t.value.length; i++){
-                    const c = t.value.charCodeAt(i);
-                    decs.push(c); hexs.push(c.toString(16).toUpperCase());
+        function loop() {
+            if (!gameActive) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ball.y += ball.speed;
+            ctx.fillStyle = "#f43f5e"; ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = "#1e293b"; ctx.fillRect(paddle.x, canvas.height - 25, paddle.w, paddle.h);
+            if (ball.y + ball.r > canvas.height - 25) {
+                if (ball.x > paddle.x && ball.x < paddle.x + paddle.w) {
+                    gameScore++; document.getElementById('game-score').textContent = gameScore;
+                    ball.y = 0; ball.x = Math.random() * (canvas.width - 40) + 20; ball.speed += 0.2;
+                } else if (ball.y > canvas.height) {
+                    gameActive = false; document.getElementById('game-overlay').classList.remove('hidden');
                 }
-                d.value = decs.join(' '); h.value = hexs.join(' ');
-            } else if(type === 'dec') {
-                const codes = d.value.split(/\s+/);
-                let txt = "", hexs = [];
-                codes.forEach(c => {
-                    const n = parseInt(c);
-                    if(!isNaN(n)){ txt += String.fromCharCode(n); hexs.push(n.toString(16).toUpperCase()); }
+            }
+            requestAnimationFrame(loop);
+        }
+
+        // --- TIC TAC TOE ---
+        let tttBoard = Array(9).fill(null), tttTurn = 'X';
+        function initTTT() {
+            document.querySelectorAll('.ttt-cell').forEach(cell => {
+                cell.addEventListener('click', () => {
+                    const idx = cell.dataset.index;
+                    if(!tttBoard[idx] && !checkTTTWinner()) {
+                        tttBoard[idx] = tttTurn; cell.textContent = tttTurn;
+                        if(checkTTTWinner()) {
+                            document.getElementById('ttt-status').textContent = `Winner: ${tttTurn}!`;
+                        } else if(!tttBoard.includes(null)) {
+                            document.getElementById('ttt-status').textContent = "Draw!";
+                        } else { 
+                            tttTurn = tttTurn === 'X' ? 'O' : 'X'; 
+                            document.getElementById('ttt-status').textContent = `Player ${tttTurn}'s Turn`; 
+                        }
+                    }
                 });
-                t.value = txt; h.value = hexs.join(' ');
-            } else if(type === 'hex') {
-                const hexes = h.value.replace(/[^0-9a-fA-F]/g, '');
-                let txt = "", decs = [];
-                for(let i=0; i<hexes.length; i+=2){
-                    const n = parseInt(hexes.substr(i,2), 16);
-                    if(!isNaN(n)){ txt += String.fromCharCode(n); decs.push(n); }
-                }
-                t.value = txt; d.value = decs.join(' ');
-            }
+            });
         }
+        function checkTTTWinner() {
+            const p = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+            return p.some(([a,b,c]) => tttBoard[a] && tttBoard[a] === tttBoard[b] && tttBoard[a] === tttBoard[c]);
+        }
+        function resetTTT() { tttBoard.fill(null); tttTurn = 'X'; document.getElementById('ttt-status').textContent = "Player X's Turn"; document.querySelectorAll('.ttt-cell').forEach(c => c.textContent = ''); }
 
-        // INIT
-        window.onload = () => {
-            renderOdo();
-            renderClickOdo();
-        };
+        window.onload = () => { renderOdo(); initTTT(); };
     </script>
 </body>
 </html>
